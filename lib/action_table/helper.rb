@@ -8,7 +8,7 @@ module ActionTable
     def action_table(
       records,
       fields,
-      styles: %i[bordered striped hover],
+      styles: ActionTable.config.table_styles,
       link: :name,
       paginate: false,
       actions: []
