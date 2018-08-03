@@ -1,34 +1,35 @@
 # frozen_string_literal: true
 
 require 'set'
+require 'action_table/bootstrap_styles'
 
 module ActionTable
   class View
     include ActionView::Helpers::UrlHelper
     include ActionTable.config.rails_host_app.routes.url_helpers
 
-    attr_reader :model_name, :rows
+    attr_reader :model_name, :rows, :styles
 
     def initialize(
-      cols:,
+      columns:,
       records:,
       paginate: false,
-      link: ActionTable.config.link_method,
+      links: ActionTable.config.links,
       actions: ActionTable.config.actions,
       styles: ActionTable.config.styles
     )
-      @col_names  = cols.map(&:to_s)
+      @columns    = columns.map(&:to_s)
       @rows       = records
       @table_name = records.table_name
       @model_name = @table_name.singularize
       @paginate   = paginate
-      @link       = Set.new(Array(link.to_s)).reject(&:empty?)
+      @links      = Set.new(Array(links).map(&:to_s)).reject(&:empty?)
       @actions    = Array(actions).map(&:to_s)
-      @styles     = Array(styles)
+      @styles     = BootstrapStyles.new(styles)
     end
 
     def headers
-      @headers ||= @col_names.map { |name| t_col(name) }
+      @headers ||= @columns.map { |name| t_col(name) }
     end
 
     # add header column padding for actions
@@ -36,26 +37,22 @@ module ActionTable
       @actions_header ||= [''] * @actions.length
     end
 
-    def cols(record)
-      attribute_columns = @col_names.map do |name|
+    def columns(record)
+      attribute_columns = @columns.map do |name|
         title = record.public_send(name)
-        if title.present? && @link.include?(name)
+        if title.present? && @links.include?(name)
           link_to(title, record_path(record))
         else
           title
         end
       end
 
-      actions = t_actions.zip(@actions).map do |data|
+      actions = t_actions.zip(@actions).map! do |data|
         title, name = data
         link_to(title, record_path(record, action: name))
       end
 
       attribute_columns + actions
-    end
-
-    def styles_class
-      @styles.map { |style| "table-#{style}" }.join(' ')
     end
 
     def paginate?

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'action_table/version'
-require 'action_table/railtie'
+require 'action_table/railtie' if defined?(Rails)
 
 module ActionTable
   def self.configuration
@@ -18,14 +18,14 @@ module ActionTable
   end
 
   class Configuration
-    attr_accessor :styles, :actions, :link_method
+    attr_accessor :styles, :actions, :links
     attr_writer :rails_host_app
 
     def initialize
       @rails_host_app = nil
       @styles = []
       @actions = []
-      @link_method = :name
+      @links = []
     end
 
     def rails_host_app

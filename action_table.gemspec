@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Jacob Burenstam']
   spec.email         = ['burenstam@gmail.com']
 
-  spec.summary       = 'Render ActiveModel or ActiveRecord objects as HTML tables with one line of Ruby.'
-  spec.description   = 'Render ActiveModel or ActiveRecord objects as HTML tables with one line of Ruby - supports some simple configuration options.'
+  spec.summary       = 'Render ActiveRecord objects as HTML tables with one line of Ruby.'
+  spec.description   = 'Render ActiveRecord objects as HTML tables with one line of Ruby - supports some simple configuration options.'
   spec.homepage      = 'https://github.com/buren/action_table'
   spec.license       = 'MIT'
 

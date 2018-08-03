@@ -1,6 +1,6 @@
 # ActionTable
 
-Render ActiveModel or ActiveRecord objects as HTML tables with one line of Ruby - supports some simple configuration options.
+Render ActiveRecord objects as HTML tables with one line of Ruby - supports some simple configuration options.
 
 :warning: Only works with Ruby on Rails.
 
