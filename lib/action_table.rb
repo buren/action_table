@@ -18,12 +18,14 @@ module ActionTable
   end
 
   class Configuration
-    attr_accessor :table_styles
+    attr_accessor :styles, :actions, :link_method
     attr_writer :rails_host_app
 
     def initialize
       @rails_host_app = nil
-      @table_styles = []
+      @styles = []
+      @actions = []
+      @link_method = :name
     end
 
     def rails_host_app

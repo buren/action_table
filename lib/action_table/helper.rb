@@ -22,10 +22,10 @@ module ActionTable
     def action_table(
       records,
       fields,
-      styles: ActionTable.config.table_styles,
-      link: :name,
       paginate: false,
-      actions: []
+      link: ActionTable.config.link_method,
+      actions: ActionTable.config.actions,
+      styles: ActionTable.config.styles
     )
       action_table = View.new(
         cols: fields,

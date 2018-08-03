@@ -13,9 +13,9 @@ module ActionTable
       cols:,
       records:,
       paginate: false,
-      link: nil,
-      actions: [],
-      styles: ActionTable.config.table_styles
+      link: ActionTable.config.link_method,
+      actions: ActionTable.config.actions,
+      styles: ActionTable.config.styles
     )
       @col_names  = cols.map(&:to_s)
       @rows       = records
