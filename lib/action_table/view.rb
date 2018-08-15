@@ -20,8 +20,6 @@ module ActionTable
     )
       @columns    = Array(columns).map(&:to_s)
       @rows       = records
-      @table_name = records.table_name
-      @model_name = @table_name.singularize
       @paginate   = paginate
       @links      = Set.new(Array(links).map(&:to_s)).reject(&:empty?)
       @actions    = Array(actions).map(&:to_s)
@@ -65,7 +63,7 @@ module ActionTable
 
     # This must be defined for record_path to work
     def controller
-      @table_name
+      table_name
     end
 
     # Contstruct path to record, i.e programs_path(record)
@@ -85,8 +83,27 @@ module ActionTable
     end
 
     def t_col(col_name)
-      t_key = "activerecord.attributes.#{@model_name}.#{col_name}"
-      I18n.t(t_key, default: col_name.titleize)
+      if model_name?
+        t_key = "activerecord.attributes.#{model_name}.#{col_name}"
+        return I18n.t(t_key, default: col_name.titleize)
+      end
+
+      col_name.humanize.titleize
     end
+
+    private
+
+    def table_name
+      rows.table_name
+    end
+
+    def model_name
+      table_name.singularize
+    end
+
+    def table_name?
+      rows.respond_to?(:table_name)
+    end
+    alias_method :model_name?, :table_name?
   end
 end
