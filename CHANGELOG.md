@@ -2,6 +2,10 @@
 
 ## HEAD
 
+### v0.4.0
+
+- Decrease public API of View
+- Minimal support for rendering non-ActiveRecord tables
 
 ## v0.3.0
 
