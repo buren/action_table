@@ -1,29 +1,26 @@
 # frozen_string_literal: true
 
 require 'set'
-require 'action_table/bootstrap_styles'
 
 module ActionTable
   class View
     include ActionView::Helpers::UrlHelper
     include ActionTable.config.rails_host_app.routes.url_helpers
 
-    attr_reader :model_name, :rows, :styles
+    attr_reader :rows
 
     def initialize(
       columns:,
       records:,
       paginate: false,
       links: ActionTable.config.links,
-      actions: ActionTable.config.actions,
-      styles: ActionTable.config.styles
+      actions: ActionTable.config.actions
     )
       @columns    = Array(columns).map(&:to_s)
       @rows       = records
       @paginate   = paginate
       @links      = Set.new(Array(links).map(&:to_s)).reject(&:empty?)
       @actions    = Array(actions).map(&:to_s)
-      @styles     = BootstrapStyles.new(styles)
     end
 
     def headers

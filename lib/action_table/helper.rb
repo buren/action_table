@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'erb'
+require 'action_table/bootstrap_styles'
 require 'action_table/view'
 
 module ActionTable
@@ -33,10 +33,10 @@ module ActionTable
         paginate: paginate,
         links: links,
         actions: actions,
-        styles: styles,
       )
 
-      render('action_table/table', table: action_table)
+      styles = BootstrapStyles.new(styles)
+      render('action_table/table', table: action_table, styles: styles)
     end
   end
 end

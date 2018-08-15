@@ -1,10 +1,10 @@
-<% wrapper_class = table.styles.responsive_wrapper_class %>
+<% wrapper_class = styles.responsive_wrapper_class %>
 
 <% if wrapper_class %>
 <div class="<%= wrapper_class %>">
 <% end %>
 
-<table class="<%= table.styles.table_classes %>">
+<table class="<%= styles.table_classes %>">
   <thead>
     <% table.headers.each do |header| %>
       <th><%= header %></th>
