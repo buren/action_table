@@ -73,6 +73,8 @@ module ActionTable
       public_send(path, record)
     end
 
+    private
+
     def t_actions
       @actions.map { |name| t_action(name) }
     end
@@ -90,8 +92,6 @@ module ActionTable
 
       col_name.humanize.titleize
     end
-
-    private
 
     def table_name
       rows.table_name
