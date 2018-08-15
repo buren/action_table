@@ -18,7 +18,7 @@ module ActionTable
       actions: ActionTable.config.actions,
       styles: ActionTable.config.styles
     )
-      @columns    = columns.map(&:to_s)
+      @columns    = Array(columns).map(&:to_s)
       @rows       = records
       @table_name = records.table_name
       @model_name = @table_name.singularize
